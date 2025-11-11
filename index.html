@@ -5,18 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Flowchart Maksimum & Minimum</title>
 
-  <!-- Mermaid (UMD build — cocok untuk lokal) -->
+  <!-- Mermaid UMD (jalan di lokal + Live Server) -->
   <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
 
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
 
   <script>
-    // Inisialisasi Mermaid
-    mermaid.initialize({
-      startOnLoad: true,
-      theme: "forest"
-    });
+    mermaid.initialize({ startOnLoad: true, theme: "forest" });
   </script>
 </head>
 
@@ -25,29 +21,25 @@
     Flowchart & Implementasi Program Maksimum & Minimum
   </h1>
 
-  <!-- Flowchart -->
+  <!-- FLOWCHART -->
   <div class="bg-white rounded-2xl shadow-lg p-6 w-11/12 md:w-3/4 lg:w-1/2">
     <div class="mermaid text-center">
 graph TD
-A([Mulai])
-B([Input N])
-C([Input daftar angka])
-D([Inisialisasi variabel])
-E{batas < N?}
-F([Ambil nilai dari list])
-G([Perbarui maks = max(maks, nilai)])
-H([Perbarui minim = min(minim, nilai)])
-I([Tambah batas + 1])
-J([Tampilkan hasil maks dan minim])
-K([Selesai])
-
-A --> B --> C --> D --> E
-E -->|Ya| F --> G --> H --> I --> E
-E -->|Tidak| J --> K
+A(["Mulai"]) --> B(["Input N"])
+B --> C(["Input daftar angka"])
+C --> D(["Inisialisasi variabel"])
+D --> E{"Apakah batas < N"}
+E -->|"Ya"| F(["Ambil nilai dari list"])
+F --> G(["Perbarui maks = max(maks, nilai)"])
+G --> H(["Perbarui minim = min(minim, nilai)"])
+H --> I(["Tambah batas + 1"])
+I --> E
+E -->|"Tidak"| J(["Tampilkan hasil maks dan minim"])
+J --> K(["Selesai"])
     </div>
   </div>
 
-  <!-- Implementasi Program -->
+  <!-- IMPLEMENTASI PROGRAM -->
   <div class="bg-white rounded-2xl shadow-lg p-6 w-11/12 md:w-3/4 lg:w-1/2 mt-10">
     <h2 class="text-2xl font-semibold text-teal-700 mb-4">Implementasi Interaktif (JavaScript)</h2>
     <div class="flex flex-col space-y-4">
@@ -65,7 +57,7 @@ E -->|Tidak| J --> K
     </div>
   </div>
 
-  <!-- Script JavaScript -->
+  <!-- SCRIPT -->
   <script>
     document.getElementById("hitungBtn").addEventListener("click", function() {
       const N = parseInt(document.getElementById("inputN").value);
