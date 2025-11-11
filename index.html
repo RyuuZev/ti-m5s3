@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flowchart Maksimum & Minimum</title>
+
+  <!-- Mermaid (UMD build — cocok untuk lokal) -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    // Inisialisasi Mermaid
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: "forest"
+    });
+  </script>
+</head>
+
+<body class="bg-gradient-to-br from-emerald-100 to-teal-200 min-h-screen flex flex-col items-center py-10">
+  <h1 class="text-3xl font-bold mb-6 text-teal-800">
+    Flowchart & Implementasi Program Maksimum & Minimum
+  </h1>
+
+  <!-- Flowchart -->
+  <div class="bg-white rounded-2xl shadow-lg p-6 w-11/12 md:w-3/4 lg:w-1/2">
+    <div class="mermaid text-center">
+graph TD
+A([Mulai])
+B([Input N])
+C([Input daftar angka])
+D([Inisialisasi variabel])
+E{batas < N?}
+F([Ambil nilai dari list])
+G([Perbarui maks = max(maks, nilai)])
+H([Perbarui minim = min(minim, nilai)])
+I([Tambah batas + 1])
+J([Tampilkan hasil maks dan minim])
+K([Selesai])
+
+A --> B --> C --> D --> E
+E -->|Ya| F --> G --> H --> I --> E
+E -->|Tidak| J --> K
+    </div>
+  </div>
+
+  <!-- Implementasi Program -->
+  <div class="bg-white rounded-2xl shadow-lg p-6 w-11/12 md:w-3/4 lg:w-1/2 mt-10">
+    <h2 class="text-2xl font-semibold text-teal-700 mb-4">Implementasi Interaktif (JavaScript)</h2>
+    <div class="flex flex-col space-y-4">
+      <label class="text-gray-700 font-medium">Masukkan jumlah angka (N):</label>
+      <input id="inputN" type="number" class="border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-teal-400" placeholder="Contoh: 5">
+
+      <label class="text-gray-700 font-medium">Masukkan angka (pisahkan dengan spasi):</label>
+      <input id="inputList" type="text" class="border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-teal-400" placeholder="Contoh: 3 7 -1 9 5">
+
+      <button id="hitungBtn" class="bg-teal-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-teal-700 transition">
+        Hitung Maksimum & Minimum
+      </button>
+
+      <div id="output" class="text-center text-xl font-semibold text-teal-800 mt-4"></div>
+    </div>
+  </div>
+
+  <!-- Script JavaScript -->
+  <script>
+    document.getElementById("hitungBtn").addEventListener("click", function() {
+      const N = parseInt(document.getElementById("inputN").value);
+      const listStr = document.getElementById("inputList").value.trim();
+      const angka = listStr.split(" ").map(Number);
+
+      if (angka.length !== N || angka.some(isNaN)) {
+        document.getElementById("output").innerHTML = "⚠️ Pastikan jumlah angka sesuai dengan N dan semuanya berupa angka!";
+        return;
+      }
+
+      let batas = 0;
+      let maks = -100000;
+      let minim = 100000;
+
+      while (batas < N) {
+        const nilai = angka[batas];
+        maks = Math.max(maks, nilai);
+        minim = Math.min(minim, nilai);
+        batas++;
+      }
+
+      document.getElementById("output").innerHTML = `
+        ✅ Nilai Maksimum: <b>${maks}</b><br>
+        🔽 Nilai Minimum: <b>${minim}</b>
+      `;
+    });
+  </script>
+</body>
+</html>
